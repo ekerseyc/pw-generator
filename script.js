@@ -11,9 +11,19 @@ function generatePassword(){
   var number= "1234567890";
   var special= "~!@#$%^&*()-_=+/.`"
   // pool var will clean up the code so it's not a mess, simplifies it
-  var pool = letters;
+  var pool = "";
+  
+  // if the user doesn't select a number between 8-128 or uses numbers, the generator will restart
+  if (count < 8 || count > 128 || !count ) {
+    alert('Please choose a number between 8 and 128.');
+    return "";
+  }
 
   // prompts for choosing what you want in your password
+  if (confirm("Do you want undercase letters in your password?")) {
+    pool += letters;
+  }
+
   if (confirm("Do you want numbers in your password?")) {
     pool += number;
   }
@@ -24,6 +34,11 @@ function generatePassword(){
 
   if (confirm("Do you want uppercase letters in your password?")) {
     pool += uppercase;
+  }
+
+  if (pool === "") {
+    alert('You need to select at least one character for your password.')
+    return "";
   }
 
   // generates the password based on the amount of characters and which elements you picked
